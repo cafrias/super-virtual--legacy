@@ -1,0 +1,14 @@
+{
+  "name": "super-virtual",
+  "version": "1.0.0",
+  "description": "A Virtual Supermarket Application",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Carlos Frias <carlos.a.frias@gmail.com>",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "lerna": "^3.21.0"
+  }
+}
