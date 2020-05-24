@@ -1,7 +1,9 @@
 import './bootstrap';
 
+import { container } from 'tsyringe';
 import { ApolloServer, gql } from 'apollo-server';
-import dbConnect from './db/connect';
+
+import DatabaseConnection from './lib/DB/DatabaseConnection';
 
 const typeDefs = gql`
   type Thing {
@@ -33,7 +35,9 @@ function startServer(): void {
   });
 }
 
-dbConnect()
+container
+  .resolve(DatabaseConnection)
+  .connect()
   .then(() => {
     startServer();
   })

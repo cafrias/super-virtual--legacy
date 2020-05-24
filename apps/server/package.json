@@ -15,7 +15,9 @@
     "apollo-server": "^2.13.1",
     "dotenv": "^8.2.0",
     "graphql": "^15.0.0",
-    "mongoose": "^5.9.15"
+    "mongoose": "^5.9.15",
+    "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.3.0"
   },
   "devDependencies": {
     "@types/mongoose": "^5.7.21",
