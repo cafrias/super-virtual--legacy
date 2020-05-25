@@ -5,7 +5,7 @@ export const CategoryDiscriminatorKey = 'category';
 
 export interface Category extends Group {
   children: Group[];
-  parent?: Group;
+  parent?: Category;
 
   addChild(child: Group): Group[];
 }
@@ -17,6 +17,7 @@ const CategorySchema = new mongoose.Schema<Category>(
   {
     parent: {
       type: mongoose.Schema.Types.ObjectId,
+      // TODO: change for CategoryModelName
       ref: GroupModelName,
     },
     children: [
@@ -34,6 +35,7 @@ const CategorySchema = new mongoose.Schema<Category>(
 //
 // Methods
 //
+// TODO: hoist to parent class
 CategorySchema.method('addChild', function addChild(
   this: Category,
   child: Group
@@ -45,6 +47,7 @@ CategorySchema.method('addChild', function addChild(
 //
 // Hooks
 //
+// TODO: hoist to parent class
 CategorySchema.post('save', async function postSave(this: Category) {
   if (this.parent) {
     await this.parent.save();
