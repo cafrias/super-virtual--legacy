@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "test:watch": "jest --watch",
     "build": "tsc"
   },

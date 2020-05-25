@@ -35,6 +35,11 @@ const ProductSchema = new mongoose.Schema({
 });
 
 //
+// Indexes
+//
+ProductSchema.index({ brand: 1, name: 1 }, { unique: true });
+
+//
 // Model
 //
 export const ProductModelName = 'Product';

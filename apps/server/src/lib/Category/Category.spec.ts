@@ -1,21 +1,9 @@
-import { MongoMemoryServer } from 'mongodb-memory-server';
-import DatabaseConnection from '../DB/DatabaseConnection';
 import CategoryService from './CategoryService';
 import CategoryModel from './Category';
+import setupMemoryDB from '../../../test/setupMemoryDB';
 
 describe('CategoryModel', () => {
-  const connection = new DatabaseConnection();
-  const mongoServer = new MongoMemoryServer();
-
-  beforeAll(async () => {
-    const uri = await mongoServer.getUri();
-    return connection.connect(uri);
-  });
-
-  afterAll(async () => {
-    await connection.disconnect();
-    await mongoServer.stop();
-  });
+  setupMemoryDB();
 
   describe('post save', () => {
     it('saves parent', async () => {

@@ -18,6 +18,7 @@ export default class DatabaseConnection {
       const connection = await connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useCreateIndex: true,
       });
       this.connection = connection;
     } catch (err) {
