@@ -12,7 +12,7 @@ export default class UserService {
 
     // Create user instance
     const newUser = new UserModel({
-      email: input.email,
+      ...input,
       password: encryptedPassword,
     });
 
