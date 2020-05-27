@@ -1,22 +1,28 @@
 import CustomerService from './CustomerService';
-import PasswordService from '../../lib/Auth/PasswordService';
-import WeakPasswordError from '../../lib/Auth/errors/WeakPasswordError';
+import UserService from '../User/UserService';
 
-describe('UserService', () => {
-  describe('createUser', () => {
+jest.mock('../User/UserService');
+
+const mockedUserService = (UserService as unknown) as jest.Mock<
+  typeof UserService
+>;
+
+describe('CustomerService', () => {
+  describe('createCustomer', () => {
     const email = 'user@example.com';
     const password = 'A_Safe_0n1';
 
+    beforeEach(() => {
+      mockedUserService.mockClear();
+    });
+
     it('creates correctly', async () => {
-      const created = await CustomerService.createCustomer({
+      await CustomerService.createCustomer({
         email,
         password,
       });
 
-      // password should be encrypted
-      expect(await PasswordService.compare(password, created.password)).toBe(
-        true
-      );
+      expect(UserService.getEncryptedPassword).toHaveBeenCalledTimes(1);
     });
 
     it('when address defined, creates correctly', async () => {
@@ -38,15 +44,6 @@ describe('UserService', () => {
           password,
         })
       ).rejects.toThrow();
-    });
-
-    it('fails when password is weak', async () => {
-      await expect(
-        CustomerService.createCustomer({
-          email,
-          password: '123456',
-        })
-      ).rejects.toThrow(WeakPasswordError);
     });
   });
 });

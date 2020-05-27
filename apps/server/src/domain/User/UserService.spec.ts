@@ -3,36 +3,18 @@ import PasswordService from '../../lib/Auth/PasswordService';
 import WeakPasswordError from '../../lib/Auth/errors/WeakPasswordError';
 
 describe('UserService', () => {
-  describe('createUser', () => {
-    it('creates correctly', async () => {
+  describe('getEncryptedPassword', () => {
+    it('when password is OK, returns encrypted password', async () => {
       const password = 'A_Safe_0n1';
-      const created = await UserService.createUser({
-        email: 'user@example.com',
-        password,
-      });
+      const hashed = await UserService.getEncryptedPassword(password);
 
-      // password should be encrypted
-      expect(await PasswordService.compare(password, created.password)).toBe(
-        true
+      expect(await PasswordService.compare(password, hashed)).toBe(true);
+    });
+
+    it('when password is weak, fails', async () => {
+      await expect(UserService.getEncryptedPassword('123456')).rejects.toThrow(
+        WeakPasswordError
       );
-    });
-
-    it('fails when email is invalid', async () => {
-      await expect(
-        UserService.createUser({
-          email: 'invalid',
-          password: 'A_Safe_0n1',
-        })
-      ).rejects.toThrow();
-    });
-
-    it('fails when password is weak', async () => {
-      await expect(
-        UserService.createUser({
-          email: 'user@example.com',
-          password: '123456',
-        })
-      ).rejects.toThrow(WeakPasswordError);
     });
   });
 });

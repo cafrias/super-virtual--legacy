@@ -1,24 +1,19 @@
-import CreateUserDTO from './dto/CreateUser.dto';
-import UserModel, { User } from './User';
 import PasswordService from '../../lib/Auth/PasswordService';
 
 export default class UserService {
-  static async createUser(input: CreateUserDTO): Promise<User> {
+  static async getEncryptedPassword(password: string): Promise<string> {
     // Check password strength
-    PasswordService.checkPasswordStrength(input.password);
+    PasswordService.checkPasswordStrength(password);
 
     // Encrypt password
-    const encryptedPassword = await PasswordService.encrypt(input.password);
-
-    // Create user instance
-    const newUser = new UserModel({
-      ...input,
-      password: encryptedPassword,
-    });
-
-    // Validate
-    await newUser.validate();
-
-    return newUser;
+    return PasswordService.encrypt(password);
   }
+
+  // Why we don't have a `createUser` method here?
+  // Well, check the domain model and you'll find that User is an
+  // abstract class. You should only instantiate User's children
+  // But the problem is that Mongoose doesn't no provide any mechanism against
+  // abstract instantiation, boomer! The approach taken is to create
+  // entities through their corresponding service, this convention
+  // will most likely circumvent the issue.
 }
