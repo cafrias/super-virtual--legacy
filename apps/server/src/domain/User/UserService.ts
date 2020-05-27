@@ -1,6 +1,6 @@
 import CreateUserDTO from './dto/CreateUser.dto';
 import UserModel, { User } from './User';
-import PasswordService from '../Auth/PasswordService';
+import PasswordService from '../../lib/Auth/PasswordService';
 
 export default class UserService {
   static async createUser(input: CreateUserDTO): Promise<User> {

@@ -1,6 +1,6 @@
 import UserService from './UserService';
-import PasswordService from '../Auth/PasswordService';
-import WeakPasswordError from '../Auth/errors/WeakPasswordError';
+import PasswordService from '../../lib/Auth/PasswordService';
+import WeakPasswordError from '../../lib/Auth/errors/WeakPasswordError';
 
 describe('UserService', () => {
   describe('createUser', () => {
