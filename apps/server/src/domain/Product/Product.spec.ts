@@ -1,6 +1,8 @@
 import ProductService from './ProductService';
 import BrandService from '../Brand/BrandService';
 import setupMemoryDB from '../../../test/setupMemoryDB';
+import { Units } from '../Units/Units';
+import { StockCheckInReason } from '../StockCheckIn/StockCheckInReason';
 
 describe('ProductModel', () => {
   setupMemoryDB();
@@ -18,6 +20,9 @@ describe('ProductModel', () => {
       brand,
       name: productName,
       picture: 'http://logo.power',
+      measurementUnits: Units.UNIT,
+      amount: 1,
+      creationReason: StockCheckInReason.STOCK_RENEWAL,
     });
     await p1.save();
 
@@ -25,6 +30,9 @@ describe('ProductModel', () => {
       brand,
       name: productName,
       picture: 'http://different.picture',
+      measurementUnits: Units.GRAM,
+      amount: 1,
+      creationReason: StockCheckInReason.STOCK_RENEWAL,
     });
 
     await expect(p2.save()).rejects.toThrow();

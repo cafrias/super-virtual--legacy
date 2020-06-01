@@ -1,6 +1,8 @@
 import CreateProductDTO from './dto/CreateProductDTO';
 import BrandService from '../Brand/BrandService';
 import ProductService from './ProductService';
+import { Units } from '../Units/Units';
+import { StockCheckInReason } from '../StockCheckIn/StockCheckInReason';
 
 describe('ProductService', () => {
   describe('createProduct', () => {
@@ -14,6 +16,9 @@ describe('ProductService', () => {
         brand,
         name: 'Corn Oil',
         picture: 'http://corn.picture',
+        measurementUnits: Units.UNIT,
+        amount: 1,
+        creationReason: StockCheckInReason.STOCK_RENEWAL,
       };
 
       const newProduct = await ProductService.createProduct(input);
@@ -33,6 +38,9 @@ describe('ProductService', () => {
         brand,
         name: '',
         picture: 'http://corn.picture',
+        measurementUnits: Units.UNIT,
+        amount: 1,
+        creationReason: StockCheckInReason.STOCK_RENEWAL,
       };
 
       await expect(ProductService.createProduct(input)).rejects.toThrow();
@@ -48,6 +56,9 @@ describe('ProductService', () => {
         brand,
         name: 'My product',
         picture: 'http::invalid.picture',
+        measurementUnits: Units.UNIT,
+        amount: 1,
+        creationReason: StockCheckInReason.STOCK_RENEWAL,
       };
 
       await expect(ProductService.createProduct(input)).rejects.toThrow();

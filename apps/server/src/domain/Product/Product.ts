@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
 import validator from 'validator';
 import { Brand, BrandModelName } from '../Brand/Brand';
+import { Stock, StockSchema } from '../Stock/Stock';
 
 //
 // Interface
@@ -9,6 +10,7 @@ export interface Product extends mongoose.Document {
   picture: string;
   name: string;
   brand: Brand;
+  stock: Stock;
 }
 
 //
@@ -31,6 +33,10 @@ const ProductSchema = new mongoose.Schema({
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: BrandModelName,
+  },
+  stock: {
+    type: StockSchema,
+    required: true,
   },
 });
 

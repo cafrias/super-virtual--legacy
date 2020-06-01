@@ -1,0 +1,3 @@
+describe('StockService', () => {
+  xit('test', () => {});
+});
