@@ -1,12 +1,13 @@
 import * as mongoose from 'mongoose';
 import validator from 'validator';
 
-import {
-  StockMovement,
-  StockMovementModelName,
-} from '../StockMovement/StockMovement';
+import type { StockMovement } from '../StockMovement/StockMovement';
 import isNatural from '../../utils/validators/isNatural';
 import { Units } from '../Units/Units';
+import type { Product } from '../Product/Product';
+import { StockModelName } from './constants';
+import { ProductModelName } from '../Product/constants';
+import { StockMovementModelName } from '../StockMovement/constants';
 
 //
 // Interface
@@ -18,6 +19,7 @@ export interface Stock extends mongoose.Document {
   amount: number;
   movements: StockMovement[];
   units: Units;
+  product: Product;
 
   addMovement(movement: StockMovement): Stock;
   removeMovement(movementId: string): Stock;
@@ -47,6 +49,10 @@ export const StockSchema = new mongoose.Schema({
       },
       message: 'Invalid or unsupported Measurement Unit',
     },
+  },
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: ProductModelName,
   },
   movements: [
     {
@@ -94,7 +100,6 @@ StockSchema.method('removeMovement', function removeMovement(
 //
 // Model
 //
-export const StockModelName = 'Stock';
 const StockModel = mongoose.model<Stock>(StockModelName, StockSchema);
 
 export default StockModel;

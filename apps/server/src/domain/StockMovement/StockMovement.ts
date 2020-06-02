@@ -1,8 +1,9 @@
 import * as mongoose from 'mongoose';
-import { Stock, StockModelName } from '../Stock/Stock';
+import type { Stock } from '../Stock/Stock';
 import isNatural from '../../utils/validators/isNatural';
 import SchemaVersioned from '../../interfaces/SchemaVersioned';
 import Timestamped from '../../interfaces/Timestamped';
+import { StockMovementModelName } from './constants';
 
 //
 // Interface
@@ -17,7 +18,7 @@ export interface StockMovement
     Timestamped,
     SchemaVersioned {
   absoluteAmount: number;
-  stock?: Stock;
+  stock: Stock;
 
   getAmount(): number;
 }
@@ -39,7 +40,7 @@ const StockMovementSchema = new mongoose.Schema(
     },
     stock: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: StockModelName,
+      ref: 'Stock',
     },
     _schemaVersion: {
       type: Number,
@@ -63,7 +64,6 @@ StockMovementSchema.method('getAmount', function getAmount(
 //
 // Model
 //
-export const StockMovementModelName = 'StockMovement';
 const StockMovementModel = mongoose.model<StockMovement>(
   StockMovementModelName,
   StockMovementSchema

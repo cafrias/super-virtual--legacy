@@ -12,6 +12,6 @@ module.exports = {
   rules: {
     'no-console': 0,
     '@typescript-eslint/no-throw-literal': 0,
-    'import/no-cycle': 0,
+    // 'import/no-cycle': 0,
   },
 };

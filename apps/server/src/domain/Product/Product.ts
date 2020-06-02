@@ -1,7 +1,9 @@
 import * as mongoose from 'mongoose';
 import validator from 'validator';
 import { Brand, BrandModelName } from '../Brand/Brand';
-import { Stock, StockSchema } from '../Stock/Stock';
+import type { Stock } from '../Stock/Stock';
+import { ProductModelName } from './constants';
+import { StockModelName } from '../Stock/constants';
 
 //
 // Interface
@@ -10,7 +12,7 @@ export interface Product extends mongoose.Document {
   picture: string;
   name: string;
   brand: Brand;
-  stock: Stock;
+  stock?: Stock;
 }
 
 //
@@ -35,8 +37,9 @@ const ProductSchema = new mongoose.Schema({
     ref: BrandModelName,
   },
   stock: {
-    type: StockSchema,
-    required: true,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: StockModelName,
+    required: false,
   },
 });
 
@@ -48,7 +51,6 @@ ProductSchema.index({ brand: 1, name: 1 }, { unique: true });
 //
 // Model
 //
-export const ProductModelName = 'Product';
 const ProductModel = mongoose.model<Product>(ProductModelName, ProductSchema);
 
 export default ProductModel;

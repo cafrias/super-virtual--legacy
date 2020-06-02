@@ -1,3 +1,6 @@
+import { Stock } from '../../Stock/Stock';
+
 export default interface CreateStockMovementDTO {
-  amount: number;
+  absoluteAmount: number;
+  stock: Stock;
 }
