@@ -1,0 +1,1 @@
+docker-compose -f ./docker-compose.dev.yml exec mongo_1 mongo localhost --eval "rs.initiate();rs.add('mongo_2');rs.addArb('mongo_arbiter');"
