@@ -16,6 +16,9 @@ describe('StockCheckInService', () => {
       expect(newCheckIn.stock).toBe(newStock);
       expect(newCheckIn.getAmount()).toBe(5);
       expect(newCheckIn.reason).toBe(StockCheckInReason.STOCK_RENEWAL);
+      expect(newStock.movements).toHaveLength(1);
+      expect(newStock.movements[0]).toBe(newCheckIn);
+      expect(newStock.amount).toBe(5);
     });
 
     it('when amount is invalid, should fail', async () => {

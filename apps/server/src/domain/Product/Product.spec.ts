@@ -1,11 +1,21 @@
 import ProductService from './ProductService';
 import BrandService from '../Brand/BrandService';
-import setupMemoryDB from '../../../test/setupMemoryDB';
 import { Units } from '../Units/Units';
 import { StockCheckInReason } from '../StockCheckIn/StockCheckInReason';
+import setupTestDB from '../../../test/setupTestDB';
+import ProductModel from './Product';
+import BrandModel from '../Brand/Brand';
 
 describe('ProductModel', () => {
-  setupMemoryDB();
+  setupTestDB();
+
+  //
+  // Teardown
+  //
+  afterEach(async () => {
+    await BrandModel.collection.drop();
+    await ProductModel.collection.drop();
+  });
 
   it('enforce uniqueness on brand and name', async () => {
     const brand = await BrandService.createBrand({

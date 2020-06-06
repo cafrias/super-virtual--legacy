@@ -1,12 +1,20 @@
-import setupMemoryDB from '../../../test/setupMemoryDB';
+import setupTestDB from '../../../test/setupTestDB';
 import ProductGroupService from './ProductGroupService';
 import CategoryService from '../Category/CategoryService';
 import CategoryModel from '../Category/Category';
 import ProductGroupModel from './ProductGroup';
+import BrandModel from '../Brand/Brand';
+import ProductModel from '../Product/Product';
 
 describe('ProductGroup', () => {
   describe('post save', () => {
-    setupMemoryDB();
+    setupTestDB();
+
+    afterEach(async () => {
+      await CategoryModel.collection.drop();
+      await BrandModel.collection.drop();
+      await ProductModel.collection.drop();
+    });
 
     it('saves parent', async () => {
       const cat1 = await CategoryService.createCategory({

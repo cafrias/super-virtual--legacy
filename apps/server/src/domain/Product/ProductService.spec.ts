@@ -17,7 +17,7 @@ describe('ProductService', () => {
         name: 'Corn Oil',
         picture: 'http://corn.picture',
         measurementUnits: Units.UNIT,
-        amount: 1,
+        amount: 5,
         creationReason: StockCheckInReason.STOCK_RENEWAL,
       };
 
@@ -26,6 +26,45 @@ describe('ProductService', () => {
       expect(newProduct.brand.name).toBe(brand.name);
       expect(newProduct.name).toBe(input.name);
       expect(newProduct.picture).toBe(input.picture);
+      expect(newProduct.stock).toBeDefined();
+      expect(newProduct.stock.amount).toBe(5);
+      expect(newProduct.stock.movements).toHaveLength(1);
+    });
+
+    it('when amount is 0, should fail', async () => {
+      const brand = await BrandService.createBrand({
+        logo: 'http://cool.logo',
+        name: 'My alta brand',
+      });
+
+      const input: CreateProductDTO = {
+        brand,
+        name: 'Corn Oil',
+        picture: 'http://corn.picture',
+        measurementUnits: Units.UNIT,
+        amount: 0,
+        creationReason: StockCheckInReason.STOCK_RENEWAL,
+      };
+
+      await expect(ProductService.createProduct(input)).rejects.toThrow();
+    });
+
+    it('when amount is negative, fails', async () => {
+      const brand = await BrandService.createBrand({
+        logo: 'http://cool.logo',
+        name: 'My alta brand',
+      });
+
+      const input: CreateProductDTO = {
+        brand,
+        name: 'Corn Oil',
+        picture: 'http://corn.picture',
+        measurementUnits: Units.UNIT,
+        amount: -5,
+        creationReason: StockCheckInReason.STOCK_RENEWAL,
+      };
+
+      await expect(ProductService.createProduct(input)).rejects.toThrow();
     });
 
     it('when name is empty, fails', async () => {

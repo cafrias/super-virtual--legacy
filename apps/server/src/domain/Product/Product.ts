@@ -19,7 +19,7 @@ export interface Product extends mongoose.Document {
 // Schema
 //
 // TODO: ensure uniqueness between name - brand
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new mongoose.Schema<Product>({
   picture: {
     type: String,
     required: true,
@@ -35,11 +35,11 @@ const ProductSchema = new mongoose.Schema({
   brand: {
     type: mongoose.Schema.Types.ObjectId,
     ref: BrandModelName,
+    required: true,
   },
   stock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: StockModelName,
-    required: false,
   },
 });
 

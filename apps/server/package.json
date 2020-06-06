@@ -10,7 +10,8 @@
     "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
     "test": "jest",
     "test:watch": "jest --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "services:start": "docker-compose -f ./docker/docker-compose.dev.yml up"
   },
   "keywords": [],
   "author": "",

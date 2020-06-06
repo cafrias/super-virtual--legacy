@@ -22,7 +22,9 @@ export interface Stock extends mongoose.Document {
   product: Product;
 
   addMovement(movement: StockMovement): Stock;
+  addMovements(movements: StockMovement[]): Stock;
   removeMovement(movementId: string): Stock;
+  hasMovements(movements: StockMovement[]): boolean;
 }
 
 //
@@ -53,6 +55,7 @@ export const StockSchema = new mongoose.Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
     ref: ProductModelName,
+    required: true,
   },
   movements: [
     {
@@ -81,6 +84,16 @@ StockSchema.method('addMovement', function addMovement(
   return this;
 });
 
+StockSchema.method('addMovements', function addMovements(
+  this: Stock,
+  movements: StockMovement[]
+): Stock {
+  movements.forEach((movement) => {
+    this.addMovement(movement);
+  });
+  return this;
+});
+
 StockSchema.method('removeMovement', function removeMovement(
   this: Stock,
   movementId: string
@@ -95,6 +108,19 @@ StockSchema.method('removeMovement', function removeMovement(
   });
 
   return this;
+});
+
+StockSchema.method('hasMovements', function hasMovements(
+  this: Stock,
+  movementIDs: StockMovement[]
+) {
+  const currentIDs = this.movements.map((currMov) => {
+    return currMov.id;
+  });
+
+  return movementIDs.every((movID) => {
+    return currentIDs.includes(movID.id);
+  });
 });
 
 //

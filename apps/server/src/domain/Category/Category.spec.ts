@@ -1,9 +1,16 @@
 import CategoryService from './CategoryService';
 import CategoryModel from './Category';
-import setupMemoryDB from '../../../test/setupMemoryDB';
+import setupTestDB from '../../../test/setupTestDB';
 
 describe('CategoryModel', () => {
-  setupMemoryDB();
+  setupTestDB();
+
+  //
+  // Teardown
+  //
+  afterEach(async () => {
+    await CategoryModel.collection.drop();
+  });
 
   describe('post save', () => {
     it('saves parent', async () => {
