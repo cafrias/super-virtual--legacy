@@ -1,0 +1,1 @@
+docker-compose -f ./docker-compose.dev.yml exec mongo-1 mongo localhost --eval "rs.initiate();"
