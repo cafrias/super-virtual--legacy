@@ -1,3 +1,0 @@
-describe('StockCheckIn', () => {
-  xit('test', () => {});
-});
