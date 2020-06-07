@@ -18,7 +18,6 @@ export interface Product extends mongoose.Document {
 //
 // Schema
 //
-// TODO: ensure uniqueness between name - brand
 const ProductSchema = new mongoose.Schema<Product>({
   picture: {
     type: String,

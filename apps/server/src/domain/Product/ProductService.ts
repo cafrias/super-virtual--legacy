@@ -12,7 +12,6 @@ export default class ProductService {
     await newProduct.validate();
 
     const newStock = await StockService.createStock({
-      movements: [],
       product: newProduct,
       units: measurementUnits,
     });
