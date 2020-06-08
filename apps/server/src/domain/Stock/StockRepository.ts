@@ -7,7 +7,7 @@ import { StockMovement } from '../StockMovement/StockMovement';
 export default class StockRepository {
   constructor(private db: DatabaseConnection) {}
 
-  async saveStock(stock: Stock, newMovements: StockMovement[]): Promise<void> {
+  async save(stock: Stock, newMovements: StockMovement[]): Promise<void> {
     // Validate movements are in stock
     if (!stock.hasMovements(newMovements)) {
       throw new Error('Stock should have all new movement IDs');

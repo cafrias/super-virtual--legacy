@@ -17,12 +17,13 @@ describe('CustomerService', () => {
     });
 
     it('creates correctly', async () => {
-      await CustomerService.createCustomer({
+      const customer = await CustomerService.createCustomer({
         email,
         password,
       });
 
       expect(UserService.getEncryptedPassword).toHaveBeenCalledTimes(1);
+      expect(customer.shoppingCart).toBeDefined();
     });
 
     it('when address defined, creates correctly', async () => {

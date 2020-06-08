@@ -81,7 +81,7 @@ describe('StockRepository', () => {
     //
     it('saves correctly', async () => {
       // Execute SuT
-      await stockRepository.saveStock(stock, newMovements);
+      await stockRepository.save(stock, newMovements);
 
       // Check stock saved in DB
       const dbStock = await StockModel.findById(stock.id).populate('movements');
@@ -110,9 +110,7 @@ describe('StockRepository', () => {
       });
 
       // Execute SuT
-      await expect(
-        stockRepository.saveStock(stock, newMovements)
-      ).rejects.toThrow();
+      await expect(stockRepository.save(stock, newMovements)).rejects.toThrow();
 
       // Expect save to have been called
       expect(stock.save).toHaveBeenCalled();
@@ -134,9 +132,7 @@ describe('StockRepository', () => {
       stock.movements = [];
 
       // Execute SuT
-      await expect(
-        stockRepository.saveStock(stock, newMovements)
-      ).rejects.toThrow();
+      await expect(stockRepository.save(stock, newMovements)).rejects.toThrow();
     });
   });
 });

@@ -2,12 +2,17 @@ import * as mongoose from 'mongoose';
 import validator from 'validator';
 
 import UserModel, { User } from '../User/User';
+import type { ShoppingCart } from '../ShoppingCart/ShoppingCart';
+
+import { CustomerModelName } from './constants';
+import { ShoppingCartModelName } from '../ShoppingCart/constants';
 
 //
 // Interface
 //
 export interface Customer extends User {
   address: string;
+  shoppingCart: ShoppingCart;
 }
 
 //
@@ -29,6 +34,11 @@ const CustomerSchema = new mongoose.Schema(
         message: 'Address when defined cannot be empty',
       },
     },
+    shoppingCart: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: ShoppingCartModelName,
+      required: false,
+    },
   },
   {
     discriminatorKey: CustomerDiscriminatorKey,
@@ -38,7 +48,6 @@ const CustomerSchema = new mongoose.Schema(
 //
 // Model
 //
-export const CustomerModelName = 'Customer';
 const CustomerModel = UserModel.discriminator<Customer>(
   CustomerModelName,
   CustomerSchema
