@@ -12,7 +12,7 @@ import IconX from './assets/icon-x.svg';
 // Types
 //
 type NavigationProps = {
-  onToggleMenu(): void;
+  onToggleCollapse(): void;
   collapsed: boolean;
 };
 
@@ -58,7 +58,7 @@ const navItems: NavItem[] = [
 //
 const Navigation: React.FunctionComponent<NavigationProps> = ({
   collapsed,
-  onToggleMenu,
+  onToggleCollapse,
 }: NavigationProps) => {
   const containerClasses = classNames(
     'border-r bg-white border-gray-500 fixed top-0 left-0 h-full w-full',
@@ -83,7 +83,7 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
             type="button"
             className={linkClasses}
             aria-label="Expandir/colapsar menu"
-            onClick={onToggleMenu}
+            onClick={onToggleCollapse}
           >
             {collapsed ? (
               <img src={IconMenu} alt="Hamburger icon" />
