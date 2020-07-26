@@ -84,6 +84,7 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
             className={linkClasses}
             aria-label="Expandir/colapsar menu"
             onClick={onToggleCollapse}
+            data-testid="toggle_collapse"
           >
             {collapsed ? (
               <img src={IconMenu} alt="Hamburger icon" />

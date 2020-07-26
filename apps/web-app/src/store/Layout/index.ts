@@ -5,7 +5,7 @@ import setStateIdempotently from '../utils/setStateIdempotently';
 //
 // Action Types
 //
-const LAYOUT_SET_NAV_COLLAPSED = 'layout/setNavCollapsed';
+export const LAYOUT_SET_NAV_COLLAPSED = 'layout/setNavCollapsed';
 
 //
 // Actions
