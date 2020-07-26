@@ -1,11 +1,13 @@
 import './index.css';
 
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './pages/Routes';
 
 const App: React.FunctionComponent = () => (
-  <main>
-    <h1 className="bg-blue-500 mt-5">Yap!</h1>
-  </main>
+  <BrowserRouter>
+    <Routes />
+  </BrowserRouter>
 );
 
 export default App;
