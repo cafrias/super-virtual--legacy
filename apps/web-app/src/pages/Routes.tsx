@@ -4,6 +4,8 @@ import CatalogPage from './CatalogPage/CatalogPage';
 import ListPage from './ListPage/ListPage';
 import ProfilePage from './ProfilePage/ProfilePage';
 import Layout from '../components/Layout/Layout';
+import LoginPage from './LoginPage/LoginPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 const Routes: React.FunctionComponent = () => (
   <Layout>
@@ -14,8 +16,14 @@ const Routes: React.FunctionComponent = () => (
       <Route path="/list">
         <ListPage />
       </Route>
-      <Route>
+      <Route path="/profile">
         <ProfilePage />
+      </Route>
+      <Route path="/login">
+        <LoginPage />
+      </Route>
+      <Route path="*">
+        <NotFoundPage />
       </Route>
     </Switch>
   </Layout>

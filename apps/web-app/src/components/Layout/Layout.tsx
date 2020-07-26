@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import classNames from 'classnames';
 
 import Navigation from './Navigation';
 import { layoutGetState } from '../../store/Layout/selectors';
@@ -17,13 +18,18 @@ const Layout: React.FunctionComponent<LayoutProps> = ({
     dispatch(layoutSetNavCollapsed(!navCollapsed));
   }, [dispatch, navCollapsed]);
 
+  const mainClasses = classNames('p-5', {
+    'ml-64': !navCollapsed,
+    'ml-12': navCollapsed,
+  });
+
   return (
     <div className="flex">
       <Navigation
         collapsed={navCollapsed}
         onToggleCollapse={onToggleCollapse}
       />
-      <main className="ml-64 p-5">{children}</main>
+      <main className={mainClasses}>{children}</main>
     </div>
   );
 };

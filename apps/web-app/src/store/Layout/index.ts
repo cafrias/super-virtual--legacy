@@ -32,7 +32,7 @@ export type LayoutState = {
   navCollapsed: boolean;
 };
 export const LayoutDefaultState = {
-  navCollapsed: false,
+  navCollapsed: true,
 };
 
 //

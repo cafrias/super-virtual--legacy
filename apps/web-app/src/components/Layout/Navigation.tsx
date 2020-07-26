@@ -61,10 +61,10 @@ const Navigation: React.FunctionComponent<NavigationProps> = ({
   onToggleCollapse,
 }: NavigationProps) => {
   const containerClasses = classNames(
-    'border-r bg-white border-gray-500 fixed top-0 left-0 h-full w-full',
+    'border-r bg-white border-gray-500 fixed top-0 left-0 h-full',
     {
-      'sm:w-12': collapsed,
-      'sm:w-64': !collapsed,
+      'w-12 sm:w-12': collapsed,
+      'w-full sm:w-64': !collapsed,
     },
   );
 
