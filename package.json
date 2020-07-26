@@ -1,5 +1,5 @@
 {
-  "name": "super-virtual",
+  "name": "@super-virtual/root",
   "version": "1.0.0",
   "description": "A Virtual Supermarket Application",
   "scripts": {
